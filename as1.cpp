@@ -8,8 +8,15 @@ string title,author;
 node *next;
 void accept();
 void display();
+void del_front();
 }*start;
 
+void node::del_front(){
+node *temp;
+temp=start;
+start=start->next;
+delete temp;
+}
 
 void node::accept(){
 node *temp=new node;
@@ -40,9 +47,7 @@ int ch;
 do
 {
 cout<<"\n        WELCOME TO LIBRARY ! ";
-cout<<"\n....................................... ";
-cout<<"\n..........1.Accept\n..........2.Display\n..........3.Exit";
-cout<<"\n........................................ ";
+cout<<"\n1.Accept\n2.Display\n3.Delete from front\n4exit";
 cout<<"\nENTER YOUR CHOICE = : ";
 cin>>ch;
 switch(ch)
@@ -55,12 +60,15 @@ cout<<"\nBookid\tprice\ttitle\tauthor"<<endl;
 n.display();
 break;
 case 3:
+n.del_front();
+break;
+case 4:
 cout<<"Thanks........";
 break;
 default:
 cout<<"Wrong choice";
 }
-}while(ch!=3);
+}while(ch!=4);
 
 return 0;
 }
