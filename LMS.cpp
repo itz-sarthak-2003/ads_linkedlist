@@ -12,9 +12,34 @@ void del_front();
 void del_last();
 void del_anynode();
 void search();
-// void update();
+void update();
 }*start;
-
+void node::update(){
+    int id,f=0;
+    node *temp;
+    temp=start;
+    cout<<"enter the bid u want to updated :"<<endl;
+    cin>>id;
+  if(temp==NULL){
+    cout<<"record is empty";
+  }else{
+    while(temp!=NULL){
+        if(temp->bid==id){
+            cout<<"book data is found"<<endl;
+            cout<<"book id"<<endl;
+           cin>> temp->bid;
+             cout<<"book price"<<endl;
+            cin>>temp->price;
+             cout<<"book title"<<endl;
+            cin>>temp->title;
+             cout<<"book author"<<endl;
+            cin>>temp->author;
+            cout<<"record updated successfully"<<endl;
+        } temp=temp->next;
+    }
+    }
+    
+};
 void node::search(){
     int id,f=0;
     node *temp;
@@ -29,29 +54,36 @@ void node::search(){
            cout<<"\n"<<temp->bid<<" \t"<<temp->price<<"\t "<<temp->title<<"\t "<<temp->author<<endl;
             break;
         }temp=temp->next;
-    }if(f==0)
-    cout<<"record is not found";
+        
+    }
 }
 void node::del_anynode(){
 int x;
-node *temp,*p;
-temp=start;
-cout<<"enter bid value which u want to delete : "<<endl;
+cout<<"enter the record no.which u want to delete : "<<endl;
 cin>>x;
-while(temp!=NULL){
-    if(temp->bid==x){
-        cout<<"data found"<<endl;
-        break;
-    }temp=temp->next;
-    
+if(x==1){
+    node *curr=start;
+    start=start->next;
+    delete curr;
+}else{
+node *curr,*prev;
+curr=start;
+prev=NULL;
+x--;
+while(x--){
+   prev=curr;
+   curr=curr->next;    
 }
-p=temp->next;
-temp->next=p->next;
-delete p;
+prev->next=curr->next;
+delete curr;
+cout<<"record deleted successfully"<<endl;
 }
-
+}
 
 void node::del_last(){
+    if(start==NULL){
+        cout<<"library is empty"<<endl;
+    }
 node *temp,*end;
 temp=start;
 if(temp->next==NULL){
@@ -67,6 +99,10 @@ temp->next=NULL;
 }}
 
 void node::del_front(){
+    
+    if(start==NULL){
+        cout<<"Library is empty"<<endl;
+    }
 node *temp;
 temp=start;
 start=start->next;
@@ -84,9 +120,11 @@ start=temp;
 
 
 void node::display(){
+    if(start==NULL){
+        cout<<"Library is empty"<<endl;
+    }
 int count=0;
-int f=0;
-node *temp;
+ node *temp;
 temp=start;
 while(temp!=NULL){
 cout<<"\n"<<temp->bid<<" \t"<<temp->price<<"\t "<<temp->title<<"\t "<<temp->author<<endl;
@@ -103,7 +141,7 @@ int ch;
 do
 {
 cout<<"\nWELCOME TO LIBRARY ! ";
-cout<<"\n1.Accept\n2.Display\n3.Delete from front\n4.Delete from last\n5.Delete any node\n6.search\n7exit";
+cout<<"\n1.Accept\n2.Display\n3.Delete from front\n4.Delete from last\n5.Delete any node\n6.search\n7.update\n8.exit";
 cout<<"\nENTER YOUR CHOICE = : ";
 cin>>ch;
 switch(ch)
@@ -128,6 +166,9 @@ case 6:
 n.search();
 break;
 case 7:
+n.update();
+break;
+case 8:
 exit(0);
 cout<<"Thanks........";
 break;
