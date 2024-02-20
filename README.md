@@ -1,1 +1,1 @@
-In this code I can make a Library Management System In this I can make a class name is LMS in this I can make some methods like accept(),display(),search(),update(),Delete() with array and singly linked list.
+In this repository I make a Library Management System codes using linked list and array . I can create some methods like accept(),display(),search(),update(),Delete() using  array and singly linked list.
