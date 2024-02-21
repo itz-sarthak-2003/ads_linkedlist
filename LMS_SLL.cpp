@@ -7,14 +7,47 @@ public:
     int bid, price;
     string title, author;
     node *next;
-    void accept();
+    void accept_front(); // insert at first
     void display();
-    void del_front();
-    void del_last();
-    void del_anynode();
-    void search();
-    void update();
-} *start;
+    void del_front();   // delete first
+    void del_last();    // del last
+    void del_anynode(); // del any
+    void search();      // for search
+    void update();      // for update
+    void add_end();     // add at the end
+} *start;               // pointing to the first node
+
+// insert at the end
+void node::add_end()
+{
+    node *newptr = new node;
+    node *temp;
+    cout << "book id" << endl;
+    cin >> newptr->bid;
+    cout << "book price" << endl;
+    cin >> newptr->price;
+    cout << "book title" << endl;
+    cin >> newptr->title;
+    cout << "book author" << endl;
+    cin >> newptr->author;
+
+    newptr->next = NULL;
+    if (start == NULL)
+    {
+        start = newptr;
+    }
+    else
+    {
+        temp = start;
+        while (temp->next != NULL)
+        {
+            temp = temp->next;
+        }
+        temp->next = newptr;
+    }
+}
+
+//for updating purpose
 void node::update()
 {
     int id, f = 0;
@@ -47,6 +80,8 @@ void node::update()
         }
     }
 };
+
+//for search purpose
 void node::search()
 {
     int id, f = 0;
@@ -61,13 +96,17 @@ void node::search()
             f = 1;
             cout << "book data is found" << endl;
             cout << "\nBookid\tprice\ttitle\tauthor" << endl;
-            cout << "\n"
-                 << temp->bid << " \t" << temp->price << "\t " << temp->title << "\t " << temp->author << endl;
+            cout << "\n"<< temp->bid << " \t" << temp->price << "\t " << temp->title << "\t " << temp->author << endl;
             break;
         }
         temp = temp->next;
     }
+    if(f==0){
+        cout<<"record is not found"<<endl;
+    }
 }
+
+//for del any node
 void node::del_anynode()
 {
     int x;
@@ -96,6 +135,7 @@ void node::del_anynode()
     }
 }
 
+//for del last node
 void node::del_last()
 {
     if (start == NULL)
@@ -120,6 +160,8 @@ void node::del_last()
     }
 }
 
+
+//for delete first node
 void node::del_front()
 {
 
@@ -133,7 +175,9 @@ void node::del_front()
     delete temp;
 }
 
-void node::accept()
+
+//for accept at 1st position
+void node::accept_front()
 {
     node *temp = new node;
     cout << "enter bid, price ,title, author:" << endl;
@@ -143,6 +187,7 @@ void node::accept()
     start = temp;
 }
 
+//for display
 void node::display()
 {
     if (start == NULL)
@@ -154,10 +199,9 @@ void node::display()
     temp = start;
     while (temp != NULL)
     {
-        cout << "\n"
-             << temp->bid << " \t" << temp->price << "\t " << temp->title << "\t " << temp->author << endl;
+        cout << "\n"<< temp->bid << " \t" << temp->price << "\t " << temp->title << "\t " << temp->author << endl;
         temp = temp->next;
-        count++;
+        count++;//for counting records
     }
     cout << "\nTotal no of books :" << count;
 }
@@ -169,13 +213,13 @@ int main()
     do
     {
         cout << "\nWELCOME TO LIBRARY ! ";
-        cout << "\n1.Accept\n2.Display\n3.Delete from front\n4.Delete from last\n5.Delete any node\n6.search\n7.update\n8.exit";
+        cout << "\n1.Accept\n2.Display\n3.Delete from front\n4.Delete from last\n5.Delete any node\n6.search\n7.update\n8.at_end\n9.exit";
         cout << "\nENTER YOUR CHOICE = : ";
         cin >> ch;
         switch (ch)
         {
         case 1:
-            n.accept();
+            n.accept_front();
             break;
         case 2:
             cout << "\nBookid\tprice\ttitle\tauthor" << endl;
@@ -197,6 +241,9 @@ int main()
             n.update();
             break;
         case 8:
+            n.add_end();
+            break;
+        case 9:
             exit(0);
             cout << "Thanks........";
             break;
