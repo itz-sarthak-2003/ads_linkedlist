@@ -16,7 +16,7 @@ public:
     void update();      // for update
     void add_end();     // add at the end
 } *start;               // pointing to the first node
-
+int count=0;
 // insert at the end
 void node::add_end()
 {
@@ -65,6 +65,7 @@ void node::update()
         {
             if (temp->bid == id)
             {
+                f=1;
                 cout << "book data is found" << endl;
                 cout << "book id" << endl;
                 cin >> temp->bid;
@@ -77,6 +78,9 @@ void node::update()
                 cout << "record updated successfully" << endl;
             }
             temp = temp->next;
+        }
+        if(f==0){
+            cout<<"record is not found"<<endl;
         }
     }
 };
