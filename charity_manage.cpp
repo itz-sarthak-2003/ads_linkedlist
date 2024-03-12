@@ -7,11 +7,11 @@ public:
     int id,mobile;
     string name,address;
     node *next,*prev;
-    void accept_front(); // insert at first
+    void add_donor(); // to add info of donor
     void display();
-    void del(); // del any
-    void search();      // for search
-    void update();      // for update
+    void remove_donor(); // to remove donor info
+    void search();      // for searching donor info
+    void update();      // for updating donor info
 
 } *start,*end1;               // pointing to the first node
 int count=0;
@@ -22,7 +22,7 @@ void node::update()
     int _id, f = 0;
     node *temp;
     temp = start;
-    cout << "enter the id u want to updated :" << endl;
+    cout << "enter the donor id u want to updated :" << endl;
     cin >> _id;
     if (temp == NULL)
     {
@@ -36,13 +36,13 @@ void node::update()
             {
                 f=1;
                 cout << "charity data is found" << endl;
-                cout << " id" << endl;
+                cout << " donor id : " << endl;
                 cin >> temp->id;
-                cout << "name" << endl;
+                cout << "donor name : " << endl;
                 cin >> temp->name;
-                cout << "mobile" << endl;
+                cout << "donor mobile : " << endl;
                 cin >> temp->mobile;
-                cout << "address" << endl;
+                cout << "donor address : " << endl;
                 cin >> temp->address;
                 cout << "record updated successfully" << endl;
             }
@@ -60,14 +60,15 @@ void node::search()
     int _id, f = 0;
     node *temp;
     temp = start;
-    cout << "enter the id :" << endl;
+    cout << "enter the donor id which u want to search :" << endl;
     cin >> _id;
     while (temp != NULL)
     {
         if (temp->id == _id)
         {
             f = 1;
-            cout << "book data is found" << endl;
+            cout << "donor data is found" << endl;
+            cout<<"donor information : "<<endl;
             cout << "\nid\tname\tmobile\taddress" << endl;
             cout<<  "\n"<<temp->id <<" \t" << temp->name <<" \t" << temp->mobile <<" \t" << temp->address<<endl;
             break;
@@ -80,7 +81,7 @@ void node::search()
 }
 
 //for del 
-void node::del()
+void node::remove_donor()
 {
     int x,f=0;
     node *temp,*p;
@@ -102,11 +103,10 @@ delete temp;
 }
 
 //for accept
-void node::accept_front()
+void node::add_donor()
 {
     node *temp = new node;
-    //node *end1=new node;
-    cout << "enter id, name,mobile,address :" << endl;
+    cout << "enter id, name,mobile,address of donor :" << endl;
     cin >> temp->id >> temp->name >> temp->mobile >> temp->address;
     temp->next = NULL;
     temp->prev=NULL;
@@ -118,17 +118,14 @@ void node::accept_front()
         temp->prev=end1;
         end1=temp;
     }
-    //temp->next = start;
-    //start = temp;
 }
 
 //for display
 void node::display()
-{
-   
+{   
     if (start == NULL)
     {
-        cout << "Library is empty" << endl;
+        cout << "List is empty" << endl;
     }
     int count = 0;
     node *temp;
@@ -139,7 +136,7 @@ void node::display()
         temp = temp->next;
         count++;//for counting records
     }
-    cout << "\nTotal no of books :" << count;
+    cout << "\nTotal no of donors :" << count;
 }
 
 int main()
@@ -148,21 +145,21 @@ int main()
     int ch;
     do
     {
-        cout << "\nWELCOME TO LIBRARY ! ";
-        cout << "\n1.Accept\n2.Display\n3.Delete\n4.search\n5.update\n6.exit";
+        cout << "\n1.Add donor information\n2.Display\n3.Remove donor information\n4.search\n5.update\n6.exit";
         cout << "\nENTER YOUR CHOICE = : ";
         cin >> ch;
         switch (ch)
         {
         case 1:
-            n.accept_front();
+            n.add_donor();
             break;
         case 2:
+        cout<<"\ndonor information : "<<endl;
             cout << "\nid\tname\tmobile\taddress" << endl;
             n.display();
             break;
         case 3:
-            n.del();
+            n.remove_donor();
             break;
         case 4:
             n.search();
@@ -178,7 +175,7 @@ int main()
         default:
             cout << "Wrong choice";
         }
-    } while (ch != 10);
+    } while (ch != 6);
 
     return 0;
 }
